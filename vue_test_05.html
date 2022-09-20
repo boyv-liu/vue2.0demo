@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue组件</title>
+    <style>
+        #app{
+           margin-bottom: 50px;
+        }
+        #app,
+        #componentApp{
+            padding: 20px;
+            border: 1px solid #000;
+
+        }
+    </style>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+</head>
+<body>
+    <!-- 组件中input -->
+    <!-- <div id="app">
+        <custom-input :value="searchText" @input="searchText=$event"></custom-input>
+        <custom-input v-model="searchText"></custom-input>
+        <button @click="console.log(searchText)">取值</button>
+        <button @click="searchText='hahaha'">设置值</button>
+    </div> -->
+
+    <!-- 插槽 -->
+    <div id="app">
+        <child>
+            <!-- 匿名插槽 -->
+            <!-- <p>我是匿名插槽的内容</p>
+            <button>我是匿名插槽的按钮</button> -->
+
+            <!-- 具名插槽 -->
+            <!-- <template v-slot:bottom>
+                <p>我是底部的具名插槽</p>
+            </template>
+            <template v-slot:top>
+                <p>我是头部的具名插槽</p>
+            </template> -->
+            
+            <!-- 作用域插槽 -->
+            <!-- <template v-slot:default="{user}">
+                <p>姓名是:{{user}}</p>
+            </template>
+            <template v-slot:bottom="{age}">
+                <p>年龄是:{{age}}</p>
+            </template> -->
+
+        </child>
+    </div>
+
+    <!-- 动态组件 -->
+    <!-- <div id="app1">
+        <component is="coma"></component>
+
+        <button @click="changeComponent('coma')">显示a</button>
+        <button @click="changeComponent('comb')">显示b</button>
+        <component :is="name"></component>
+    </div> -->
+
+    <script>
+        // 7、在组件上使用v-model
+        // Vue.component('custom-input', {
+        //     props: ['value'],
+        //     template: `
+        //         <input
+        //         v-bind:value="value"
+        //         v-on:input="$emit('input', $event.target.value)"
+        //         >
+        //     `
+        // })
+        // new Vue({
+        //     el: '#app',
+        //     data: {
+        //         searchText: ''
+        //     },
+        // })
+
+        // 8、插槽
+        Vue.component('child',{
+            data:function(){
+                return{
+                    name:'张三',
+                    age:'18'
+                }
+            },
+            // 匿名插槽
+            // template: `
+            //     <div>
+            //         <h3>我是子组件</h3>
+            //         <slot></slot>
+            //     </div>
+            // `
+            // 具名插槽
+            // template: `
+            //     <div>
+            //         <slot name="top"></slot>
+            //         <h3>我是子组件</h3>
+            //         <slot name="bottom"></slot>
+            //     </div>
+            // `
+            // 作用域插槽
+            // template: `
+            //     <div>
+            //         <h3>我是子组件</h3>
+            //         <slot :user="name"></slot>
+            //         <slot name="bottom" :age="age"></slot>
+            //     </div>
+            // `
+        })
+        new Vue({
+            el:'#app',
+        })
+
+        // var coma = {
+        //     template: '<div>aaaa</div>'
+        // }
+        // var comb = {
+        //     template: '<div>bbbb</div>'
+        // }
+        // let vm = new Vue({
+        //     el: '#app1',
+        //     data:{
+        //         name:'coma'
+        //     },
+        //     components: {
+        //         coma: coma,
+        //         comb: comb,
+        //     },
+        //     methods:{
+        //         changeComponent(name){
+        //             this.name = name
+        //         }
+        //     }
+        // })
+
+    </script>
+    
+</body>
+</html>

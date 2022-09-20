@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue</title>
+    <style>
+        body{
+            user-select: none;
+        }
+        img{
+            width: 200px;
+            height: 300px;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    
+</head>
+<body>
+    <div id="app">
+        <!-- 计算属性 -->
+        <p>原始值a:{{a}}</p>
+        <p>a的2倍:{{aDouble}}</p>
+        <p>a的3倍:{{aTreble}}</p>
+        <button @click="a=2">改变a的值</button>
+        <button @click="aDouble=4">改变aDouble的值</button>
+        <hr>
+
+        <!-- 监听 -->
+        <p>{{message}}</p>
+        <button @click="message = 'hello vue'">改变值</button><br>
+        <p>姓名:{{obj.name}}</p>
+        <p>班级:{{obj.info.grade + obj.info.class}}</p>
+        <button @click="getCertificate">小升初</button><br>
+        <img v-if="showPic" src="./img/img4.png" alt="">
+        <hr>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                a:1,
+                message:'hello',
+                obj:{
+                    name:'张三',
+                    info:{
+                        grade:'六年级',
+                        class:'二班'
+                    }
+                },
+                showPic:false,
+            },
+
+            // 计算属性
+            computed:{
+                aTreble:function(){
+                    return this.a*3
+                },
+                // aDouble:vm=>{
+                //     return vm.a * 2
+                // },
+                // 简写
+                // aDouble: vm => vm.a * 2,
+
+                // // 缓存
+                //  aDouble:vm=>{
+                //     console.log('我被缓存起来了,a变了我才会再次计算')
+                //     return vm.a * 2
+                // },
+
+                // 读取和设置
+                aDouble:{
+                    get:function(){
+                        console.log('get到值了')
+                        return this.a * 2
+                    },
+                    set:function(val){
+                        console.log('set值了'+val)
+                        // 当aDouble改变时调用
+                        this.a = val
+                    }
+                }
+            },
+
+            // 监听
+            watch:{
+                message:function(newVal,oldVal){
+                    console.log('new:'+newVal)
+                    console.log('old:'+oldVal)
+                },
+                // 深度监听
+                // obj:{
+                //     handler:function(newVal){
+                //         console.log(newVal)
+                //         this.showPic = true
+                //     },
+                //     deep:true
+                // },
+           
+                'obj.info.grade':function(newVal,oldVal){
+                    console.log('年级改变了')
+                }
+
+            },
+
+            methods:{
+                getCertificate(){
+                    this.obj.info.grade = '初一'
+                    this.obj.info.class = '六班'
+                },
+            }
+
+
+        })
+
+       
+        
+    </script>
+    
+</body>
+</html>

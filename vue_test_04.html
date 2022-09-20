@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue组件</title>
+    <style>
+        #app{
+           margin-bottom: 50px;
+        }
+        #app,
+        #componentApp{
+            padding: 20px;
+            border: 1px solid #000;
+
+        }
+    </style>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+    
+</head>
+<body>
+    <!-- <div id="app">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <div id="componentApp">
+        <button-counter></button-counter>
+    </div> -->
+
+    <!-- 父传子 -->
+    <!-- <div id="app">
+        <diy-article title="我是标题" :content="content"></diy-article>
+        <diy-article v-for="item in articleList" :key="item.id" :title="item.title" :content="item.content"></diy-article>
+    </div> -->
+
+    <!-- 子传父 -->
+    <!-- <div id="app">
+        <p>{{ total }}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        可以通过 $event 访问到被抛出的这个值
+        <button-counter @increment="total = $event"></button-counter>
+    </div> -->
+
+    <script>
+        // // 1、注册全局组件
+        // // 所有实例都可使用
+        // Vue.component('button-counter',{
+        //     data: function () {
+        //         return {
+        //             count: 0
+        //         }
+        //     },
+        //     template: `<button @click="count++">点击了 {{ count }} 下</button>`
+        // })
+
+        // // 创建实例1
+        // new Vue({
+        //     el:'#app',
+        // })
+        //  // 创建实例2
+        //  new Vue({
+        //     el:'#componentApp',
+        // })
+
+        // 2、局部组件
+        // 只能在当前实例中使用
+        // 实例1
+        // new Vue({
+        //     el:'#app',  
+        //     components:{
+        //         'button-counter':{
+        //             data: function () {
+        //                 return {
+        //                     count: 0
+        //                 }
+        //             },
+        //             template: `<button @click="count++">点击了 {{ count }} 下</button>`
+        //         }
+        //     }
+        // })
+
+        // 实例2
+        // new Vue({
+        //     el:'#componentApp',  
+        //     components:{
+        //         'button-counter':{
+        //             data: function () {
+        //                 return {
+        //                     count: 0
+        //                 }
+        //             },
+        //             template: `<button @click="count++">点击haha {{ count }} 下</button>`
+        //         }
+        //     }
+        // })
+
+        // // 3、组件的data是个函数
+        // Vue.component('button-counter',{
+        //     data: function () {
+        //         return {
+        //             count: 0
+        //         }
+        //     },
+        //     // data:{
+        //     //     count: 0
+        //     // },
+        //     template: `<button @click="count++">点击了 {{ count }} 下</button>`
+        // })
+
+        // // 创建实例1
+        // new Vue({
+        //     el:'#app',
+        // })
+
+        // 4、通过prop向子组件传参
+        // Vue.component('diy-article',{
+        //     props:['title','content'],
+        //     template: ` 
+        //         <div class="artical">
+        //             <h2>{{title}}</h2>
+        //             <span>{{content}}</span>
+        //         </div>
+        //     `
+        // })
+
+        // new Vue({
+        //     el:'#app',
+        //     data:{
+        //         content:'我是内容',
+        //         articleList:[
+        //             {id:1,title:'震惊!',content:'某企业员工.....'},
+        //             {id:2,title:'你还在这样做吗?',content:'你还在....'},
+        //         ]
+        //     }
+        // })
+
+        // // 5、prop验证
+        // Vue.component('my-component', {
+        //     props: {
+        //         // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+        //         propA: Number,
+        //         // 多个可能的类型
+        //         propB: [String, Number],
+        //         // 必填的字符串
+        //         propC: {
+        //             type: String,
+        //             required: true
+        //         },
+        //         // 带有默认值的数字
+        //         propD: {
+        //             type: Number,
+        //             default: 100
+        //         },
+        //         // 带有默认值的对象
+        //         propE: {
+        //             type: Object,
+        //             // 对象或数组默认值必须从一个工厂函数获取
+        //             default: function () {
+        //                 return { message: 'hello' }
+        //             }
+        //         },
+        //         // 自定义验证函数
+        //         propF: {
+        //             validator: function (value) {
+        //                 // 这个值必须匹配下列字符串中的一个
+        //                 return ['success', 'warning', 'danger'].indexOf(value) !== -1
+        //             }
+        //         }
+        //     }
+        // })
+
+        // 6、监听子组件事件
+        // Vue.component('button-counter', {
+        //     template: `<button v-on:click="incrementHandler">点击加1</button>`,
+        //     data: function () {
+        //         return {
+        //             counter: 0
+        //         }
+        //     },
+        //     methods: {
+        //         incrementHandler: function () {
+        //             this.counter += 1
+        //             this.$emit('increment',this.counter)
+        //         }
+        //     },
+        // })
+        // new Vue({
+        //     el: '#app',
+        //     data: {
+        //         total: 0
+        //     },
+        //     methods: {
+        //         incrementTotal: function (value) {
+        //             // console.log(value)
+        //             this.total = value
+        //         }
+        //     }
+        // })
+
+    </script>
+    
+</body>
+</html>

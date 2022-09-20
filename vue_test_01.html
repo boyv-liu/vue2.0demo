@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue</title>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p ref="text">{{ message }}</p>
+    </div>
+
+    <script>
+        // // 1.开始
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue'
+            }
+        })
+
+
+        // // 2.数据对象
+        // var data = { a: 1 }
+        // // 该对象被加入到一个 Vue 实例中
+        // var vm = new Vue({
+        //     el:'#app',
+        //     data: data
+        // })
+        // // // 获得这个实例上的 property
+        // // // 返回源数据中对应的字段
+        // // console.log(vm.a == data.a) // => true
+        // // // 设置 property 也会影响到原始数据
+        // // vm.a = 2
+        // // console.log(data.a)  // => 2
+        // // // 反之
+        // // data.a = 3
+        // // console.log(vm.a) // => 3
+        
+        // // 只有存在data中的数据才是响应式的,那么对 b 的改动将不会触发任何视图的更新
+        // vm.b = 1
+        // console.log(data.b) // => undefined
+        // // 因此相应的数据需要在data中声明初始值
+        // // data = {
+        // //     a:1,
+        // //     d:2,
+        // //     ....
+        // // }
+
+        // // Object.freeze()
+        // var obj = {
+        //     foo: 'bar'
+        // }     
+        // Object.freeze(obj)
+        // obj.foo = 'hahaha'
+        // console.log(obj.foo) // => bar
+        
+        // new Vue({
+        //     el: '#app',
+        //     data: obj
+        // })
+        
+        // // 3.生命周期钩子this指向
+        // new Vue({
+        //     data: {
+        //         a: 1
+        //     },
+        //     created: function () {
+        //         console.log(this.a) // =>1
+        //     }
+            
+        //     // created:()=>{
+        //     //     console.log(this.a) // =>undefined
+        //     // }
+        // })
+
+        // 4.生命周期8大钩子
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue'
+            },
+            beforeCreate:function(){
+                console.log('beforeCreate,创建前')
+                console.log(this.message)
+                
+            },
+            created: function () {
+                console.log('created,创建后')
+                console.log(this.message)
+                
+            },
+            beforeMount: function () {
+                console.log('beforeMount,载入前')
+                console.log(this.$refs.text)
+                
+            },
+            mounted: function () {
+                console.log('mounted,载入后')
+                console.log(this.$refs.text)
+            },
+            beforeUpdate: function () {
+                console.log('beforeUpdate,更新前')
+            },
+            updated: function () {
+                console.log('updated,更新后')
+            },
+            beforeDestroy: function () {
+                console.log('beforeDestroy,销毁前')
+            },
+            destroyed: function () {
+                console.log('destroyed,销毁后')
+            },  
+        })
+        // vm.message = 'hahaha'
+        // 完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
+        // 在大多数场景中你不应该调用这个方法。最好使用 v-if 和 v-for 指令以数据驱动的方式控制子组件的生命周期
+        // vm.$destroy()
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
